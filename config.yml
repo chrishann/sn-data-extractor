@@ -1,0 +1,7 @@
+instance: demo001
+username: admin
+password: admin
+tables:
+    - cmn_department
+    - core_company
+    - sys_user
