@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'rest-client'
+require 'uri'
 require 'yaml'
 require 'awesome_print'
 
@@ -9,10 +10,15 @@ config = YAML::load(File.open(config_file_name))
 
 abort('No instance provided in config') if config['instance'].nil?
 
-tablenames = config['tables']
+extracts = config['extracts']
 
-tablenames.each_with_index do |table, i|
+extracts.each_with_index do |extract, i|
+	table = extract["table"]
+
+
 	url = "https://#{config['instance']}.service-now.com/#{table}_list.do?XML"
+	url += "&sysparm_query=#{URI.escape(extract['query'])}" if extract.include? 'query'
+
 	username = config['username']
 	pass = config['password']
 

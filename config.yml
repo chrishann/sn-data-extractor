@@ -1,7 +1,23 @@
-instance: demo001
+instance: demo01
 username: admin
 password: admin
-tables:
-    - cmn_department
-    - core_company
-    - sys_user
+extracts:
+    - table: cmn_schedule
+    - table: cmn_other_schedule
+    - table: cmn_schedule_span
+    - table: cmdb_ci_service
+    - table: service_offering
+    - table: service_offering_commitment
+    - table: service_commitment
+    - table: sys_user
+      query: u_preserve_on_clone=true^EQ
+    - table: sys_group_has_role
+      query: user.u_preserve_on_clone=true^EQ
+    - table: sys_user_group
+      query: u_preserve_on_clone=true^EQ
+    - table: sys_user_grmember
+      query: user.u_preserve_on_clone=true^ORgroup.u_preserve_on_clone=true^EQ
+    - table: sys_group_has_role
+      query: group.u_preserve_on_clone=true^EQ
+    - table: cmn_location
+      query: u_idSTARTSWITHTEST-^EQ
