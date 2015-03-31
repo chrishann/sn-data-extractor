@@ -1,6 +1,6 @@
 # SN Data Extractor
 
-Extracts data (in XML format) from a ServiceNow instance ServiceNow
+Extracts data (in XML format) from a ServiceNow instance.
 
 ## Pre-requisites
 
