@@ -11,6 +11,11 @@ config = YAML::load(File.open(config_file_name))
 abort('No instance provided in config') if config['instance'].nil?
 
 extracts = config['extracts']
+output_dir_name = File.join(File.dirname(__FILE__), 'data', "#{config['instance']}-#{Time.new.strftime('%Y%m%d-%H%M%S-%L')}")
+FileUtils.mkdir_p output_dir_name
+
+puts "Output directory: #{output_dir_name}"
+
 
 extracts.each_with_index do |extract, i|
 	table = extract["table"]
@@ -32,7 +37,7 @@ extracts.each_with_index do |extract, i|
 			if response == "<?xml version=\"1.0\" encoding=\"UTF-8\"?><error message=\"invalid table name\" table_name=\"#{table}\"/>"
 				puts "ERROR: Invalid table: #{table}"
 			else
-				File.open(File.join(File.dirname(__FILE__), 'data', "#{table}.xml"), 'w') do |f|
+				File.open(File.join(output_dir_name, "#{table}.xml"), 'w') do |f|
 					f << response
 				end
 			end
